@@ -1,288 +1,193 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Sparkles Lights — Premium</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPARKLES LIGHTS</title>
+  <style>
+    /* --- Base Styles --- */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #001233 0%, #000814 100%);
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+    /* --- Sparkle Animation --- */
+    .sparkles {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: transparent url('https://i.imgur.com/9v3U4eW.png') repeat;
+      animation: sparkleMove 30s linear infinite;
+      z-index: -1;
+      opacity: 0.3;
+    }
 
-<style>
-  :root{
-    --bg:#070913;
-    --panel:#0f1720;
-    --gold1:#ffd43b;
-    --gold2:#e0b300;
-    --muted:#9aa4ad;
-    --glass: rgba(255,255,255,0.04);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:'Poppins',system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
-    background:radial-gradient(circle at 10% 10%, rgba(255,215,59,0.03), transparent 20%),
-               linear-gradient(180deg,#03040a 0%, #07101a 60%);
-    color:#fff;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-    position:relative;
-    padding-bottom:80px;
-  }
+    @keyframes sparkleMove {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
 
-  /* subtle star field using CSS radial-gradient + animate */
-  .star-layer{
-    pointer-events:none;
-    position:fixed;
-    inset:0;
-    background-image:
-      radial-gradient(circle at 10% 20%, rgba(255,215,59,0.06) 0px, transparent 30px),
-      radial-gradient(circle at 70% 60%, rgba(255,215,59,0.04) 0px, transparent 20px),
-      radial-gradient(circle at 40% 80%, rgba(255,255,255,0.02) 0px, transparent 18px);
-    opacity:0.6;
-    mix-blend-mode:screen;
-    animation: starsFade 6s ease-in-out infinite;
-    z-index:0;
-  }
-  @keyframes starsFade{0%{opacity:0.5}50%{opacity:0.9}100%{opacity:0.5}}
+    header {
+      text-align: center;
+      padding: 30px 10px;
+    }
 
-  /* top nav */
-  header.site-header{
-    position:sticky; top:0; z-index:40;
-    background:linear-gradient(180deg, rgba(3,3,6,0.62), rgba(3,3,6,0.35));
-    backdrop-filter: blur(6px);
-    display:flex;align-items:center;justify-content:space-between;
-    padding:10px 18px;
-    border-bottom:1px solid rgba(255,215,59,0.04);
-  }
-  .brand-left{display:flex;align-items:center;gap:14px}
-  .brand-left img{width:62px;height:62px;object-fit:contain;border-radius:14px;filter:drop-shadow(0 14px 40px rgba(255,200,40,0.14));transform:translateY(0);transition:transform .45s ease}
-  .brand-left:hover img{transform:translateY(-4px)}
-  .brand-name{
-    display:flex;flex-direction:column;line-height:1;
-  }
-  .brand-name .title{
-    font-weight:900;letter-spacing:1px;color:transparent;
-    background:linear-gradient(90deg,var(--gold1),#fff7b0);
-    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    font-size:18px;
-    text-transform:uppercase;
-  }
-  .brand-name .sub{font-size:11px;color:var(--muted);margin-top:2px}
+    header img {
+      width: 140px;
+      border-radius: 50%;
+    }
 
-  nav.main-nav{display:flex;gap:18px;align-items:center}
-  nav.main-nav a{color:var(--gold1);text-decoration:none;font-weight:700;padding:6px 8px;border-radius:8px}
-  nav.main-nav a:hover{color:#fff;transform:translateY(-2px)}
+    header h1 {
+      margin: 10px 0 0;
+      font-size: 28px;
+      background: linear-gradient(to right, gold, #fff6b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
 
-  /* Hero */
-  .hero{min-height:66vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 20px;z-index:10;position:relative}
-  .hero .logo-wrap{width:150px;height:150px;border-radius:20px;background:linear-gradient(180deg, rgba(255,210,60,0.12), rgba(255,210,60,0.03));display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-  .hero .logo-wrap img{width:74%;height:74%;object-fit:contain;filter:drop-shadow(0 22px 50px rgba(255,200,40,0.2));transition:transform .8s cubic-bezier(.2,.9,.2,1)}
-  .hero .logo-wrap:hover img{transform:rotate(-6deg) scale(1.03)}
-  .brand-hero{font-size:44px;font-weight:900;margin-top:18px;letter-spacing:1px;color:var(--gold1);text-shadow:0 6px 30px rgba(255,180,40,0.08)}
-  .tagline{color:var(--muted);max-width:760px;margin-top:12px;font-size:15px;line-height:1.6}
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+    }
 
-  .hero-ctas{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-  .btn{padding:12px 18px;border-radius:14px;font-weight:800;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
-  .btn-primary{background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#07101a;box-shadow:0 12px 34px rgba(255,180,40,0.12)}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    /* Sections */
+    section {
+      padding: 20px;
+      text-align: center;
+    }
 
-  /* Catalog grid */
-  section{padding:54px 6% 48px;position:relative;z-index:5}
-  h2.section-title{text-align:center;color:var(--gold1);font-size:20px;margin-bottom:18px}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1120px;margin:0 auto}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:12px;border:1px solid rgba(255,215,59,0.04);box-shadow:0 12px 40px rgba(0,0,0,0.6);transition:transform .45s,box-shadow .45s;overflow:hidden}
-  .card:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(0,0,0,0.7)}
-  .card img{width:100%;height:210px;object-fit:cover;border-radius:8px}
-  .card h3{color:var(--gold1);margin:10px 0 6px;font-size:16px}
-  .card p{color:var(--muted);font-size:13px;margin-bottom:10px}
-  .card .row{display:flex;align-items:center;gap:10px}
-  .price{margin-left:auto;font-weight:800;color:#fff}
+    /* Products */
+    .product {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 15px;
+      margin: 15px auto;
+      width: 90%;
+      box-shadow: 0 0 15px rgba(255,215,0,0.2);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 12px;
+    }
+    .whatsapp-btn {
+      display: inline-block;
+      margin-top: 10px;
+      background: linear-gradient(90deg, #25d366, #128c7e);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-  /* contact & about */
-  .about{max-width:950px;margin:0 auto;color:var(--muted);line-height:1.7;text-align:center}
-  .contact-block{max-width:720px;margin:18px auto 0;display:flex;flex-direction:column;gap:12px;align-items:center}
-  .contact-buttons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-  .contact-buttons a.btn{width:220px;justify-content:center}
+    /* About */
+    .about p {
+      line-height: 1.6;
+      font-size: 15px;
+    }
+    .link-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .link-buttons a {
+      text-decoration: none;
+      background: linear-gradient(90deg, gold, #b38b00);
+      color: #000;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,215,0,0.5);
+    }
 
-  /* map */
-  .map-wrap{max-width:900px;margin:20px auto;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.6)}
-  .map-wrap iframe{width:100%;height:360px;border:0;display:block}
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: gold;
+      font-size: 15px;
+      text-shadow: 0 0 8px #ffda6b;
+    }
 
-  /* footer */
-  footer.site-footer{text-align:center;color:var(--muted);padding:26px 10px;border-top:1px solid rgba(255,215,59,0.03)}
-
-  /* responsive */
-  @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.hero .brand-hero{font-size:34px}}
-  @media (max-width:560px){
-    .grid{grid-template-columns:1fr;padding:0 4%}
-    .brand-name .title{font-size:14px}
-    .brand-left img{width:52px;height:52px}
-    .hero{padding:44px 16px}
-    .hero .logo-wrap{width:120px;height:120px}
-    .brand-hero{font-size:28px}
-    .card img{height:220px}
-    .contact-buttons a.btn{width:100%}
-  }
-
-  /* small fade-in reveal */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
-  .reveal.show{opacity:1;transform:translateY(0)}
-</style>
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 { font-size: 22px; }
+      nav a { font-size: 18px; }
+    }
+  </style>
 </head>
 <body>
+  <div class="sparkles"></div>
 
-  <!-- star layer -->
-  <div class="star-layer" aria-hidden="true"></div>
-
-  <!-- header / nav -->
-  <header class="site-header">
-    <div class="brand-left">
-      <!-- ensure logo.png exists in repo root -->
-      <img src="logo.png" alt="Sparkles Lights logo" id="topLogo">
-      <div class="brand-name">
-        <div class="title">SPARKLES LIGHTS</div>
-        <div class="sub">Premium LED & Flood</div>
-      </div>
-    </div>
-
-    <nav class="main-nav" aria-label="Main">
-      <a href="#home">Home</a>
-      <a href="#catalog">Catalog</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-      <a href="#location">Location</a>
-    </nav>
+  <header id="home">
+    <img src="logo.png" alt="SPARKLES LIGHTS Logo" />
+    <h1>SPARKLES LIGHTS</h1>
   </header>
 
-  <!-- hero -->
-  <section id="home" class="hero">
-    <div class="logo-wrap" aria-hidden="true">
-      <img src="logo.png" alt="Sparkles Lights logo large">
+  <nav>
+    <a href="#home">🏠</a>
+    <a href="#products">📦</a>
+    <a href="#about">ℹ️</a>
+    <a href="#location">📍</a>
+  </nav>
+
+  <section id="products">
+    <h2>Our Products</h2>
+
+    <div class="product">
+      <img src="images/light1.jpg" alt="LED Flood Light" />
+      <a href="https://wa.me/919601860305?text=Hi%20I%20want%20to%20order%20LED%20Flood%20Light!" class="whatsapp-btn">💬 Order on WhatsApp</a>
     </div>
-    <div class="brand-hero">SPARKLES LIGHTS</div>
-    <div class="tagline">Premium LED flood & industrial lighting — Build-quality, energy efficiency & premium finish for every space.</div>
 
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="#catalog">View Catalog</a>
-      <a class="btn btn-ghost" href="https://www.instagram.com/sparkles_lights1" target="_blank" rel="noreferrer">Instagram</a>
+    <div class="product">
+      <img src="images/light2.jpg" alt="Decorative Light" />
+      <a href="https://wa.me/919601860305?text=Hi%20I%20want%20to%20order%20Decorative%20Light!" class="whatsapp-btn">💬 Order on WhatsApp</a>
     </div>
-  </section>
 
-  <!-- catalog -->
-  <section id="catalog" class="reveal">
-    <h2 class="section-title">Our Catalog</h2>
-
-    <div class="grid" id="productGrid">
-      <!-- JS will populate product cards -->
-    </div>
-  </section>
-
-  <!-- about -->
-  <section id="about" class="reveal">
-    <h2 class="section-title">About Sparkles Lights</h2>
-    <div class="about">
-      <p><strong>Sparkles Lights</strong> is a trusted manufacturer, supplier and service provider of premium LED flood lights, panel lights and industrial lighting solutions. We design products with durability and a luxury finish.</p>
-      <p>We also provide <strong>repair, replacement and troubleshooting</strong> for any lighting problems — our team will help diagnose and fix issues quickly.</p>
-      <p class="muted">Quality, warranty and service are our promise.</p>
-
-      <div class="contact-block">
-        <div>📞 <strong>+91 96018 60305</strong></div>
-        <div>✉️ <strong id="emailText">sparkleslights12@gmail.com</strong></div>
-
-        <div class="contact-buttons">
-          <a class="btn btn-primary" href="mailto:sparkleslights12@gmail.com">📧 Email Sparkles Lights</a>
-          <a class="btn btn-primary" href="https://wa.me/919601860305" id="waChat">💬 Chat on WhatsApp</a>
-          <a class="btn btn-primary" href="https://www.instagram.com/sparkles_lights1" target="_blank" rel="noreferrer">📸 Instagram</a>
-        </div>
-      </div>
+    <div class="product">
+      <img src="images/light3.jpg" alt="Industrial Light" />
+      <a href="https://wa.me/919601860305?text=Hi%20I%20want%20to%20order%20Industrial%20Light!" class="whatsapp-btn">💬 Order on WhatsApp</a>
     </div>
   </section>
 
-  <!-- location -->
-  <section id="location" class="reveal">
-    <h2 class="section-title">Our Location</h2>
-    <div class="map-wrap">
-      <!-- Use the provided place; this URL is a standard maps embed with query -->
-      <iframe
-        src="https://www.google.com/maps?q=17%20G.I.D.C.%20B%2Fh%20Dharti%20Parlour%20Palanpur%20385001&output=embed"
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map">
-      </iframe>
-    </div>
-    <p style="text-align:center;color:var(--muted);margin-top:10px">Visit us: 17, G.I.D.C., B/h. Dharti Parlour, Palanpur-385001 (B.K.), Gujarat</p>
-  </section>
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+      At Sparkles Lights, we bring brilliance to every corner with premium lighting solutions — 
+      from industrial flood lights to decorative LEDs. Our goal is to merge elegance, efficiency, 
+      and long-lasting performance. We repair, design, and customize lighting setups for homes, 
+      offices, and commercial spaces. Every product is tested for quality, durability, and glow 
+      perfection — because your world deserves to shine brighter with Sparkles Lights. 💡✨
+    </p>
 
-  <!-- contact quick CTA at bottom -->
-  <section id="contact" class="reveal">
-    <h2 class="section-title">Contact & Order</h2>
-    <div style="max-width:720px;margin:0 auto;text-align:center;color:var(--muted)">
-      <p>Quick action buttons — one tap to message or email us.</p>
-
-      <div class="contact-buttons" style="margin-top:14px">
-        <a class="btn btn-primary" href="mailto:sparkleslights12@gmail.com">📧 Email</a>
-        <a class="btn btn-primary" href="#" id="whatsappOrder">💬 Order on WhatsApp</a>
-        <a class="btn btn-primary" href="https://www.instagram.com/sparkles_lights1" target="_blank">📸 Instagram</a>
-      </div>
+    <div class="link-buttons">
+      <a href="https://wa.me/919601860305">💬 Chat on WhatsApp</a>
+      <a href="https://www.instagram.com/sparkles_lights1">📷 Follow on Instagram</a>
+      <a href="mailto:sparkleslights12@gmail.com">📧 Email Us</a>
+      <a href="https://maps.app.goo.gl/ZEj6gRUb4ajft6jb7">📍 View Location</a>
     </div>
   </section>
 
-  <footer class="site-footer">
-    © 2025 Sparkles Lights — 17, G.I.D.C., Palanpur • sparkleslights12@gmail.com
+  <footer>
+    ✨ Thank You for Visiting Sparkles Lights ✨
   </footer>
-
-<!-- SCRIPTS: product data, WA auto message, reveal anim -->
-<script>
-  // --- CONFIG ---
-  const WA_NUMBER = "919601860305"; // no plus sign
-  const EMAIL = "sparkleslights12@gmail.com";
-
-  // Product list - change filenames if you uploaded different names
-  const PRODUCTS = [
-    { id:1, name:"120W Flood Light", price:"₹1,799", img:"images/product1.jpg" },
-    { id:2, name:"150W Slim Flood", price:"₹2,199", img:"images/product2.jpg" },
-    { id:3, name:"200W Flood Light (2-in-1)", price:"₹2,999", img:"images/product3.jpg" },
-    { id:4, name:"240W Lens Flood Light", price:"₹3,499", img:"images/product4.jpg" },
-    { id:5, name:"500W High Power Flood", price:"₹7,999", img:"images/product5.jpg" },
-    { id:6, name:"50W Compact Flood", price:"₹999", img:"images/product6.jpg" }
-  ];
-
-  // Render product cards
-  const grid = document.getElementById('productGrid');
-  PRODUCTS.forEach(p=>{
-    const el = document.createElement('div');
-    el.className = 'card reveal';
-    el.innerHTML = `
-      <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/800x600?text=Product'">
-      <h3>${p.name}</h3>
-      <p>${p.price} — 2 year warranty</p>
-      <div class="row">
-        <a class="btn btn-primary" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello Sparkles Lights! I am interested in this product: '+p.name+' - Price: '+p.price+'. Please share details & delivery options.')}" target="_blank">💬 Order on WhatsApp</a>
-        <div class="price">${p.price}</div>
-      </div>
-    `;
-    grid.appendChild(el);
-  });
-
-  // Scroll reveal: show elements when in view
-  const observer = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting) entry.target.classList.add('show');
-    });
-  }, {threshold:0.12});
-  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-  // Quick whatsappOrder button opens catalog chat (generic)
-  document.getElementById('whatsappOrder').addEventListener('click', function(e){
-    e.preventDefault();
-    const message = encodeURIComponent("Hello Sparkles Lights! I want to order. Please share price & delivery options.");
-    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-  });
-
-  // Set email text if needed
-  document.getElementById('emailText').textContent = EMAIL;
-</script>
-
 </body>
 </html>
