@@ -3,191 +3,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SPARKLES LIGHTS</title>
+  <title>SPARKLES Lights</title>
   <style>
-    /* --- Base Styles --- */
-    body {
+    /* ====== GLOBAL STYLE ====== */
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: "Poppins", sans-serif;
-      background: radial-gradient(circle at top, #001233 0%, #000814 100%);
-      color: #fff;
-      overflow-x: hidden;
     }
 
-    /* --- Sparkle Animation --- */
-    .sparkles {
+    body {
+      background: radial-gradient(circle at bottom, #001030, #000814 90%);
+      overflow-x: hidden;
+      color: #fff;
+      position: relative;
+    }
+
+    /* ====== STAR BACKGROUND ====== */
+    .stars {
       position: fixed;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
-      background: transparent url('https://i.imgur.com/9v3U4eW.png') repeat;
-      animation: sparkleMove 30s linear infinite;
-      z-index: -1;
-      opacity: 0.3;
+      overflow: hidden;
+      z-index: 0;
     }
 
-    @keyframes sparkleMove {
-      from { background-position: 0 0; }
-      to { background-position: 1000px 1000px; }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+      animation: moveStars 20s linear infinite;
+      opacity: 0.6;
     }
 
+    @keyframes moveStars {
+      from {
+        transform: translateY(0);
+        opacity: 0.6;
+      }
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    /* ====== HEADER ====== */
     header {
       text-align: center;
-      padding: 30px 10px;
+      padding: 50px 20px 20px;
+      z-index: 2;
+      position: relative;
     }
 
     header img {
       width: 140px;
-      border-radius: 50%;
+      height: auto;
+      filter: drop-shadow(0 0 15px gold);
     }
 
     header h1 {
-      margin: 10px 0 0;
-      font-size: 28px;
-      background: linear-gradient(to right, gold, #fff6b0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 700;
-    }
-
-    /* Navbar */
-    nav {
-      display: flex;
-      justify-content: space-around;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(8px);
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 20px;
-    }
-
-    /* Sections */
-    section {
-      padding: 20px;
-      text-align: center;
-    }
-
-    /* Products */
-    .product {
-      background: rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 15px;
-      margin: 15px auto;
-      width: 90%;
-      box-shadow: 0 0 15px rgba(255,215,0,0.2);
-    }
-    .product img {
-      width: 100%;
-      border-radius: 12px;
-    }
-    .whatsapp-btn {
-      display: inline-block;
+      font-size: 2.5rem;
+      color: gold;
+      letter-spacing: 2px;
       margin-top: 10px;
-      background: linear-gradient(90deg, #25d366, #128c7e);
-      color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
     }
 
-    /* About */
-    .about p {
-      line-height: 1.6;
-      font-size: 15px;
+    /* ====== ABOUT SECTION ====== */
+    section.about {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      padding: 30px 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(5px);
     }
-    .link-buttons {
+
+    section.about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+      color: #ddd;
+    }
+
+    .icon-links {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      justify-content: center;
+      gap: 25px;
       margin-top: 20px;
     }
-    .link-buttons a {
+
+    .icon-links a {
       text-decoration: none;
-      background: linear-gradient(90deg, gold, #b38b00);
-      color: #000;
-      font-weight: bold;
-      padding: 12px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255,215,0,0.5);
+      font-size: 1.8rem;
+      color: gold;
+      transition: transform 0.3s, color 0.3s;
     }
 
-    /* Footer */
+    .icon-links a:hover {
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* ====== CATALOG SECTION ====== */
+    section.catalog {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 20px;
+      padding: 40px 20px;
+      margin: 30px auto;
+      width: 95%;
+      max-width: 1100px;
+      z-index: 2;
+      position: relative;
+      backdrop-filter: blur(5px);
+    }
+
+    .catalog h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: gold;
+      margin-bottom: 30px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 10px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+      height: 160px;
+      object-fit: cover;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    .product h3 {
+      margin: 10px 0;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .product a {
+      text-decoration: none;
+      font-size: 1.5rem;
+      color: gold;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .product a:hover {
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* ====== FOOTER ====== */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 20px 10px;
+      font-size: 1rem;
       color: gold;
-      font-size: 15px;
-      text-shadow: 0 0 8px #ffda6b;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid rgba(255, 215, 0, 0.3);
+      z-index: 2;
+      position: relative;
     }
 
-    /* Responsive */
+    /* ====== RESPONSIVE ====== */
     @media (max-width: 600px) {
-      header h1 { font-size: 22px; }
-      nav a { font-size: 18px; }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .product img {
+        height: 130px;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="sparkles"></div>
 
-  <header id="home">
-    <img src="logo.png" alt="SPARKLES LIGHTS Logo" />
-    <h1>SPARKLES LIGHTS</h1>
+<body>
+  <!-- STAR BACKGROUND -->
+  <div class="stars" id="stars"></div>
+
+  <!-- HEADER -->
+  <header>
+    <img src="logo.png" alt="Sparkles Lights Logo" />
+    <h1>SPARKLES Lights</h1>
   </header>
 
-  <nav>
-    <a href="#home">🏠</a>
-    <a href="#products">📦</a>
-    <a href="#about">ℹ️</a>
-    <a href="#location">📍</a>
-  </nav>
-
-  <section id="products">
-    <h2>Our Products</h2>
-
-    <div class="product">
-      <img src="images/light1.jpg" alt="LED Flood Light" />
-      <a href="https://wa.me/919601860305?text=Hi%20I%20want%20to%20order%20LED%20Flood%20Light!" class="whatsapp-btn">💬 Order on WhatsApp</a>
-    </div>
-
-    <div class="product">
-      <img src="images/light2.jpg" alt="Decorative Light" />
-      <a href="https://wa.me/919601860305?text=Hi%20I%20want%20to%20order%20Decorative%20Light!" class="whatsapp-btn">💬 Order on WhatsApp</a>
-    </div>
-
-    <div class="product">
-      <img src="images/light3.jpg" alt="Industrial Light" />
-      <a href="https://wa.me/919601860305?text=Hi%20I%20want%20to%20order%20Industrial%20Light!" class="whatsapp-btn">💬 Order on WhatsApp</a>
-    </div>
-  </section>
-
-  <section id="about" class="about">
-    <h2>About Us</h2>
+  <!-- ABOUT SECTION -->
+  <section class="about">
     <p>
-      At Sparkles Lights, we bring brilliance to every corner with premium lighting solutions — 
-      from industrial flood lights to decorative LEDs. Our goal is to merge elegance, efficiency, 
-      and long-lasting performance. We repair, design, and customize lighting setups for homes, 
-      offices, and commercial spaces. Every product is tested for quality, durability, and glow 
-      perfection — because your world deserves to shine brighter with Sparkles Lights. 💡✨
+      Welcome to <strong>SPARKLES Lights</strong> — where innovation meets illumination.  
+      We specialize in creating, repairing, and customizing all types of lighting solutions for homes, offices, and commercial spaces.
+    </p>
+    <p>
+      Our team provides premium quality lights, from modern chandeliers to LED strips and outdoor decorative solutions.  
+      We also offer quick repair services and customized designs to brighten your world beautifully.
+    </p>
+    <p>
+      Trusted for quality and reliability — because at Sparkles Lights, your satisfaction truly shines.
     </p>
 
-    <div class="link-buttons">
-      <a href="https://wa.me/919601860305">💬 Chat on WhatsApp</a>
-      <a href="https://www.instagram.com/sparkles_lights1">📷 Follow on Instagram</a>
-      <a href="mailto:sparkleslights12@gmail.com">📧 Email Us</a>
-      <a href="https://maps.app.goo.gl/ZEj6gRUb4ajft6jb7">📍 View Location</a>
+    <div class="icon-links">
+      <a href="https://wa.me/919601860305" title="Chat on WhatsApp">💬</a>
+      <a href="mailto:sparkleslights12@gmail.com" title="Send Email">📧</a>
+      <a href="https://www.instagram.com/sparkles_lights1" title="Instagram">📸</a>
+      <a href="https://maps.app.goo.gl/ZEj6gRUb4ajft6jb7" title="Location">📍</a>
     </div>
   </section>
 
+  <!-- CATALOG SECTION -->
+  <section class="catalog">
+    <h2>Our Product Catalog</h2>
+    <div class="product-grid">
+      <!-- Example product cards -->
+      <div class="product">
+        <img src="light1.jpg" alt="Light Product 1" />
+        <h3>Elegant Ceiling Light</h3>
+        <a href="https://wa.me/919601860305?text=I'm%20interested%20in%20Elegant%20Ceiling%20Light">💬</a>
+      </div>
+
+      <div class="product">
+        <img src="light2.jpg" alt="Light Product 2" />
+        <h3>Golden LED Strip</h3>
+        <a href="https://wa.me/919601860305?text=I'm%20interested%20in%20Golden%20LED%20Strip">💬</a>
+      </div>
+
+      <div class="product">
+        <img src="light3.jpg" alt="Light Product 3" />
+        <h3>Decorative Wall Lamp</h3>
+        <a href="https://wa.me/919601860305?text=I'm%20interested%20in%20Decorative%20Wall%20Lamp">💬</a>
+      </div>
+
+      <!-- Add up to 20+ similar cards -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    ✨ Thank You for Visiting Sparkles Lights ✨
+    ✨ Thank you for visiting SPARKLES Lights ✨
   </footer>
+
+  <!-- STAR GENERATOR SCRIPT -->
+  <script>
+    const starsContainer = document.getElementById("stars");
+    for (let i = 0; i < 120; i++) {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      star.style.top = Math.random() * 100 + "%";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.animationDelay = Math.random() * 20 + "s";
+      starsContainer.appendChild(star);
+    }
+  </script>
 </body>
 </html>
