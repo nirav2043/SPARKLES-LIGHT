@@ -10,8 +10,12 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
     body{background:#080d15;color:#fff;overflow-x:hidden;}
     header{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
-    header img{width:120px;animation:float 3s ease-in-out infinite;}
-    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    header img{width:120px;animation:shine 3s infinite linear;}
+    @keyframes shine{
+      0%{filter:brightness(1);}
+      50%{filter:brightness(1.6) drop-shadow(0 0 10px #ffd43b);}
+      100%{filter:brightness(1);}
+    }
     h1{font-size:2.6rem;background:linear-gradient(90deg,#ffd43b,#fff7ae);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:10px;}
     p{color:#ccc;margin-top:8px;font-size:1rem;}
     nav{position:fixed;top:0;left:0;width:100%;background:#0c1322;display:flex;justify-content:center;gap:25px;padding:12px 0;z-index:1000;}
@@ -39,7 +43,7 @@
   </nav>
 
   <header id="home">
-    <img src="https://raw.githubusercontent.com/yourusername/sparkles-lights/main/logo.png" alt="Sparkles Light Logo">
+    <img src="logo.png" alt="Sparkles Light Logo">
     <h1>Sparkles Light</h1>
     <p>All Types of LED Light Manufacturers</p>
   </header>
@@ -57,10 +61,8 @@
   <section id="about">
     <h2>About Us</h2>
     <div class="about">
-      <p><b>Sparkles Light</b> is a trusted manufacturer of all types of LED lighting solutions. 
-      Our focus is on delivering high-quality, energy-efficient, and durable products for homes, offices, and industries.
-      With years of experience and innovation, we aim to brighten every corner with excellence.</p>
-      <br>
+      <p><b>Sparkles Light</b> is a trusted manufacturer of all types of LED lighting solutions.
+      We focus on quality, design, and innovation to create energy-efficient lighting for homes, offices, and industries.</p><br>
       <p><b>Contact:</b> Dipak Daka – 96018 60305 | Ankit Daka – 94848 34543</p>
       <p><b>Email:</b> sparkleslight@gmail.com</p>
     </div>
@@ -68,15 +70,13 @@
 
   <section id="location">
     <h2>Find Us</h2>
-    <iframe
-      src="https://www.google.com/maps?q=17%20GIDC%20Behind%20Hotel%20Darsan%20Thali%20Palanpur&output=embed"
-      width="100%" height="300" style="border:0;border-radius:10px;" allowfullscreen="" loading="lazy">
-    </iframe>
+    <iframe src="https://www.google.com/maps?q=17%20GIDC%20Behind%20Hotel%20Darsan%20Thali%20Palanpur&output=embed"
+      width="100%" height="300" style="border:0;border-radius:10px;" allowfullscreen="" loading="lazy"></iframe>
   </section>
 
   <a href="https://wa.me/919601860305?text=Hello%20Sparkles%20Light%2C%20I%20want%20to%20know%20about%20your%20LED%20products." class="wp-btn">💬</a>
 
-  <footer>© 2025 Sparkles Light | Designed by You</footer>
+  <footer>© 2025 Sparkles Light | Designed by Nirav2043</footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
