@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sparkles Light — LED Manufacturers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:#080d15;color:#fff;overflow-x:hidden;}
+    header{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+    header img{width:120px;animation:float 3s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    h1{font-size:2.6rem;background:linear-gradient(90deg,#ffd43b,#fff7ae);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:10px;}
+    p{color:#ccc;margin-top:8px;font-size:1rem;}
+    nav{position:fixed;top:0;left:0;width:100%;background:#0c1322;display:flex;justify-content:center;gap:25px;padding:12px 0;z-index:1000;}
+    nav a{color:#ffd43b;text-decoration:none;font-weight:600;}
+    nav a:hover{color:#fff;}
+    section{padding:60px 10%;min-height:100vh;text-align:center;}
+    h2{color:#ffd43b;margin-bottom:20px;}
+    .product{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px;margin-top:20px;}
+    .card{background:#101826;border-radius:14px;padding:15px;transition:0.5s;transform:translateY(40px);opacity:0;}
+    .card img{width:100%;border-radius:10px;}
+    .card h3{color:#ffd43b;margin:10px 0 6px;}
+    .card p{font-size:0.9rem;color:#aaa;}
+    .wp-btn{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 18px;border-radius:50%;font-size:26px;text-decoration:none;box-shadow:0 0 15px #25d366;}
+    .about{max-width:700px;margin:auto;line-height:1.7;color:#ccc;}
+    footer{text-align:center;padding:20px;color:#777;font-size:0.9rem;}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Catalog</a>
+    <a href="#about">About</a>
+    <a href="#location">Location</a>
+  </nav>
+
+  <header id="home">
+    <img src="https://raw.githubusercontent.com/yourusername/sparkles-lights/main/logo.png" alt="Sparkles Light Logo">
+    <h1>Sparkles Light</h1>
+    <p>All Types of LED Light Manufacturers</p>
+  </header>
+
+  <section id="products">
+    <h2>Our Premium Catalog</h2>
+    <div class="product">
+      <div class="card"><img src="https://picsum.photos/400/300?random=1"><h3>LED Bulb</h3><p>Energy efficient bright lighting.</p></div>
+      <div class="card"><img src="https://picsum.photos/400/300?random=2"><h3>Panel Light</h3><p>Perfect for offices and homes.</p></div>
+      <div class="card"><img src="https://picsum.photos/400/300?random=3"><h3>Street Light</h3><p>Durable & long life outdoor use.</p></div>
+      <div class="card"><img src="https://picsum.photos/400/300?random=4"><h3>Flood Light</h3><p>Powerful lighting for large areas.</p></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <div class="about">
+      <p><b>Sparkles Light</b> is a trusted manufacturer of all types of LED lighting solutions. 
+      Our focus is on delivering high-quality, energy-efficient, and durable products for homes, offices, and industries.
+      With years of experience and innovation, we aim to brighten every corner with excellence.</p>
+      <br>
+      <p><b>Contact:</b> Dipak Daka – 96018 60305 | Ankit Daka – 94848 34543</p>
+      <p><b>Email:</b> sparkleslight@gmail.com</p>
+    </div>
+  </section>
+
+  <section id="location">
+    <h2>Find Us</h2>
+    <iframe
+      src="https://www.google.com/maps?q=17%20GIDC%20Behind%20Hotel%20Darsan%20Thali%20Palanpur&output=embed"
+      width="100%" height="300" style="border:0;border-radius:10px;" allowfullscreen="" loading="lazy">
+    </iframe>
+  </section>
+
+  <a href="https://wa.me/919601860305?text=Hello%20Sparkles%20Light%2C%20I%20want%20to%20know%20about%20your%20LED%20products." class="wp-btn">💬</a>
+
+  <footer>© 2025 Sparkles Light | Designed by You</footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.from("header img",{opacity:0,y:-40,duration:1});
+    gsap.from("h1",{y:50,opacity:0,duration:1});
+    gsap.from(".card",{scrollTrigger:{trigger:".card",start:"top 85%"},y:40,opacity:0,stagger:0.2,duration:0.8});
+  </script>
+</body>
+</html>
