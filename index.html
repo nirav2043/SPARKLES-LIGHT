@@ -4,168 +4,285 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Sparkles Lights — Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+
 <style>
   :root{
-    --bg:#070914; --card:#0f1720; --accent:#ffd43b; --muted:#9aa4ad;
-    --glass: rgba(255,255,255,0.03);
+    --bg:#070913;
+    --panel:#0f1720;
+    --gold1:#ffd43b;
+    --gold2:#e0b300;
+    --muted:#9aa4ad;
+    --glass: rgba(255,255,255,0.04);
   }
-  *{box-sizing:border-box} body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,#06080c 0%, #07101a 100%);color:#fff;-webkit-font-smoothing:antialiased}
-  nav{position:fixed;top:0;left:0;right:0;height:54px;background:rgba(4,8,12,0.8);display:flex;align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(6px)}
-  nav .link{color:var(--accent);margin:0 18px;text-decoration:none;font-weight:600}
-  header{height:78vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-  .logo{width:120px;height:120px;border-radius:20px;display:flex;align-items:center;justify-content:center;background:conic-gradient(from 180deg,#ffd43b,#fff6d0 40%, #ffd43b);box-shadow:0 10px 35px rgba(255,212,59,0.12);margin-bottom:18px;animation:float 3s ease-in-out infinite}
-  .logo img{width:86%;height:86%;object-fit:contain;filter:drop-shadow(0 6px 18px rgba(255,212,59,0.18))}
-  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px) scale(1.02)}100%{transform:translateY(0)}}
-  h1{font-size:36px;margin:6px 0;background:linear-gradient(90deg,var(--accent),#fff7b0);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  p.lead{color:var(--muted);max-width:780px;margin:6px auto 16px;font-size:15px}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-  .btn{background:var(--accent);color:#07101a;padding:12px 16px;border-radius:10px;text-decoration:none;font-weight:700;box-shadow:0 8px 20px rgba(255,212,59,0.12)}
-  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:11px 14px;border-radius:10px;text-decoration:none}
-  section{padding:64px 6%}
-  h2{color:var(--accent);text-align:center;font-size:22px;margin-bottom:18px}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:'Poppins',system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:radial-gradient(circle at 10% 10%, rgba(255,215,59,0.03), transparent 20%),
+               linear-gradient(180deg,#03040a 0%, #07101a 60%);
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+    position:relative;
+    padding-bottom:80px;
+  }
+
+  /* subtle star field using CSS radial-gradient + animate */
+  .star-layer{
+    pointer-events:none;
+    position:fixed;
+    inset:0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,215,59,0.06) 0px, transparent 30px),
+      radial-gradient(circle at 70% 60%, rgba(255,215,59,0.04) 0px, transparent 20px),
+      radial-gradient(circle at 40% 80%, rgba(255,255,255,0.02) 0px, transparent 18px);
+    opacity:0.6;
+    mix-blend-mode:screen;
+    animation: starsFade 6s ease-in-out infinite;
+    z-index:0;
+  }
+  @keyframes starsFade{0%{opacity:0.5}50%{opacity:0.9}100%{opacity:0.5}}
+
+  /* top nav */
+  header.site-header{
+    position:sticky; top:0; z-index:40;
+    background:linear-gradient(180deg, rgba(3,3,6,0.62), rgba(3,3,6,0.35));
+    backdrop-filter: blur(6px);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:10px 18px;
+    border-bottom:1px solid rgba(255,215,59,0.04);
+  }
+  .brand-left{display:flex;align-items:center;gap:14px}
+  .brand-left img{width:62px;height:62px;object-fit:contain;border-radius:14px;filter:drop-shadow(0 14px 40px rgba(255,200,40,0.14));transform:translateY(0);transition:transform .45s ease}
+  .brand-left:hover img{transform:translateY(-4px)}
+  .brand-name{
+    display:flex;flex-direction:column;line-height:1;
+  }
+  .brand-name .title{
+    font-weight:900;letter-spacing:1px;color:transparent;
+    background:linear-gradient(90deg,var(--gold1),#fff7b0);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    font-size:18px;
+    text-transform:uppercase;
+  }
+  .brand-name .sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+  nav.main-nav{display:flex;gap:18px;align-items:center}
+  nav.main-nav a{color:var(--gold1);text-decoration:none;font-weight:700;padding:6px 8px;border-radius:8px}
+  nav.main-nav a:hover{color:#fff;transform:translateY(-2px)}
+
+  /* Hero */
+  .hero{min-height:66vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 20px;z-index:10;position:relative}
+  .hero .logo-wrap{width:150px;height:150px;border-radius:20px;background:linear-gradient(180deg, rgba(255,210,60,0.12), rgba(255,210,60,0.03));display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+  .hero .logo-wrap img{width:74%;height:74%;object-fit:contain;filter:drop-shadow(0 22px 50px rgba(255,200,40,0.2));transition:transform .8s cubic-bezier(.2,.9,.2,1)}
+  .hero .logo-wrap:hover img{transform:rotate(-6deg) scale(1.03)}
+  .brand-hero{font-size:44px;font-weight:900;margin-top:18px;letter-spacing:1px;color:var(--gold1);text-shadow:0 6px 30px rgba(255,180,40,0.08)}
+  .tagline{color:var(--muted);max-width:760px;margin-top:12px;font-size:15px;line-height:1.6}
+
+  .hero-ctas{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn{padding:12px 18px;border-radius:14px;font-weight:800;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+  .btn-primary{background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#07101a;box-shadow:0 12px 34px rgba(255,180,40,0.12)}
+  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
   /* Catalog grid */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .card{background:var(--card);padding:12px;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.5);transition:transform .35s, box-shadow .35s;overflow:hidden}
-  .card:hover{transform:translateY(-8px);box-shadow:0 22px 40px rgba(0,0,0,0.6)}
-  .card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
-  .card h3{margin:10px 0 6px;color:#fff;font-size:16px}
-  .card p{margin:0 0 10px;color:var(--muted);font-size:13px}
-  .card .actions{display:flex;gap:8px;align-items:center}
-  .price{font-weight:700;color:#fff;margin-left:auto}
-  .wh{background:#25D366;color:#062017;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;box-shadow:0 6px 16px rgba(37,211,102,0.12)}
+  section{padding:54px 6% 48px;position:relative;z-index:5}
+  h2.section-title{text-align:center;color:var(--gold1);font-size:20px;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1120px;margin:0 auto}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:12px;border:1px solid rgba(255,215,59,0.04);box-shadow:0 12px 40px rgba(0,0,0,0.6);transition:transform .45s,box-shadow .45s;overflow:hidden}
+  .card:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(0,0,0,0.7)}
+  .card img{width:100%;height:210px;object-fit:cover;border-radius:8px}
+  .card h3{color:var(--gold1);margin:10px 0 6px;font-size:16px}
+  .card p{color:var(--muted);font-size:13px;margin-bottom:10px}
+  .card .row{display:flex;align-items:center;gap:10px}
+  .price{margin-left:auto;font-weight:800;color:#fff}
+
+  /* contact & about */
+  .about{max-width:950px;margin:0 auto;color:var(--muted);line-height:1.7;text-align:center}
+  .contact-block{max-width:720px;margin:18px auto 0;display:flex;flex-direction:column;gap:12px;align-items:center}
+  .contact-buttons{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .contact-buttons a.btn{width:220px;justify-content:center}
+
+  /* map */
+  .map-wrap{max-width:900px;margin:20px auto;border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.6)}
+  .map-wrap iframe{width:100%;height:360px;border:0;display:block}
+
+  /* footer */
+  footer.site-footer{text-align:center;color:var(--muted);padding:26px 10px;border-top:1px solid rgba(255,215,59,0.03)}
+
   /* responsive */
-  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:560px){.grid{grid-template-columns:1fr}.logo{width:96px;height:96px}.card img{height:180px} h1{font-size:28px}}
-  /* about & map */
-  .about{max-width:900px;margin:0 auto;color:var(--muted);line-height:1.7}
-  .contact-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:12px}
-  .icon{display:inline-block;width:40px;height:40px;border-radius:50%;background:var(--glass);display:flex;align-items:center;justify-content:center}
-  footer{padding:28px;text-align:center;color:#9aa4ad}
-  /* small sparkle animation background */
-  .sparkles{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;opacity:0.06;background:radial-gradient(circle at 10% 20%, #ffd43b 0px, transparent 40px), radial-gradient(circle at 80% 60%, #ffd43b 0px, transparent 30px)}
+  @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}.hero .brand-hero{font-size:34px}}
+  @media (max-width:560px){
+    .grid{grid-template-columns:1fr;padding:0 4%}
+    .brand-name .title{font-size:14px}
+    .brand-left img{width:52px;height:52px}
+    .hero{padding:44px 16px}
+    .hero .logo-wrap{width:120px;height:120px}
+    .brand-hero{font-size:28px}
+    .card img{height:220px}
+    .contact-buttons a.btn{width:100%}
+  }
+
+  /* small fade-in reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="link" href="#home">Home</a>
-  <a class="link" href="#catalog">Catalog</a>
-  <a class="link" href="#about">About</a>
-  <a class="link" href="#location">Location</a>
-</nav>
+  <!-- star layer -->
+  <div class="star-layer" aria-hidden="true"></div>
 
-<div class="sparkles" aria-hidden="true"></div>
-
-<header id="home">
-  <div class="logo" aria-hidden="true">
-    <!-- replace logo.png with your uploaded logo file in repo root -->
-    <img src="logo.png" alt="Sparkles Lights logo" id="logoImg">
-  </div>
-  <h1>Sparkles Lights</h1>
-  <p class="lead">Premium LED Flood & Industrial Lights — Energy efficient, long-lasting and designed for luxury spaces.</p>
-  <div class="cta">
-    <a class="btn" href="#catalog">View Catalog</a>
-    <a class="ghost" href="https://www.instagram.com/sparkles_lights1" target="_blank" rel="noreferrer">Instagram</a>
-  </div>
-</header>
-
-<section id="catalog">
-  <h2>Our Catalog</h2>
-
-  <!-- Grid: update images in /images/ folder -->
-  <div class="grid" id="productGrid">
-    <!-- product card example format. Duplicate for more products or JS will insert -->
-    <!-- We'll also load default sample products via JS -->
-  </div>
-</section>
-
-<section id="about">
-  <h2>About Sparkles Lights</h2>
-  <div class="about">
-    <p><strong>Sparkles Lights</strong> is a trusted manufacturer of LED flood lights, panel lights and industrial lighting solutions. We emphasize build-quality, energy efficiency and stylish finishes so your space looks premium and performs better.</p>
-    <div class="contact-row">
-      <div>📞 <strong>+91 96018 60305</strong></div>
-      <div>✉️ <strong><span id="emailText">sparkleslights12@gmail.com</span></strong></div>
-      <a class="ghost" href="https://www.instagram.com/sparkles_lights1" target="_blank" rel="noreferrer">Follow Instagram</a>
+  <!-- header / nav -->
+  <header class="site-header">
+    <div class="brand-left">
+      <!-- ensure logo.png exists in repo root -->
+      <img src="logo.png" alt="Sparkles Lights logo" id="topLogo">
+      <div class="brand-name">
+        <div class="title">SPARKLES LIGHTS</div>
+        <div class="sub">Premium LED & Flood</div>
+      </div>
     </div>
-  </div>
-</section>
 
-<section id="location">
-  <h2>Our Location</h2>
-  <div style="max-width:900px;margin:14px auto;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.6)">
-    <!-- user's provided Google Maps link -->
-    <iframe src="https://maps.app.goo.gl/ZEj6gRUb4ajft6jb7?g_st=awb" width="100%" height="360" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
-  <p style="text-align:center;color:var(--muted);margin-top:8px">Visit us: 17, G.I.D.C., B/h. Dharti Parlour, Palanpur-385001 (B.K.), Gujarat</p>
-</section>
+    <nav class="main-nav" aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#catalog">Catalog</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#location">Location</a>
+    </nav>
+  </header>
 
-<footer>
-  <div>© 2025 Sparkles Lights</div>
-  <div style="margin-top:8px"><a href="mailto:sparkleslights12@gmail.com" style="color:var(--muted);text-decoration:none">sparkleslights12@gmail.com</a></div>
-</footer>
+  <!-- hero -->
+  <section id="home" class="hero">
+    <div class="logo-wrap" aria-hidden="true">
+      <img src="logo.png" alt="Sparkles Lights logo large">
+    </div>
+    <div class="brand-hero">SPARKLES LIGHTS</div>
+    <div class="tagline">Premium LED flood & industrial lighting — Build-quality, energy efficiency & premium finish for every space.</div>
 
-<!-- WhatsApp auto message JS and product data -->
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#catalog">View Catalog</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/sparkles_lights1" target="_blank" rel="noreferrer">Instagram</a>
+    </div>
+  </section>
+
+  <!-- catalog -->
+  <section id="catalog" class="reveal">
+    <h2 class="section-title">Our Catalog</h2>
+
+    <div class="grid" id="productGrid">
+      <!-- JS will populate product cards -->
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about" class="reveal">
+    <h2 class="section-title">About Sparkles Lights</h2>
+    <div class="about">
+      <p><strong>Sparkles Lights</strong> is a trusted manufacturer, supplier and service provider of premium LED flood lights, panel lights and industrial lighting solutions. We design products with durability and a luxury finish.</p>
+      <p>We also provide <strong>repair, replacement and troubleshooting</strong> for any lighting problems — our team will help diagnose and fix issues quickly.</p>
+      <p class="muted">Quality, warranty and service are our promise.</p>
+
+      <div class="contact-block">
+        <div>📞 <strong>+91 96018 60305</strong></div>
+        <div>✉️ <strong id="emailText">sparkleslights12@gmail.com</strong></div>
+
+        <div class="contact-buttons">
+          <a class="btn btn-primary" href="mailto:sparkleslights12@gmail.com">📧 Email Sparkles Lights</a>
+          <a class="btn btn-primary" href="https://wa.me/919601860305" id="waChat">💬 Chat on WhatsApp</a>
+          <a class="btn btn-primary" href="https://www.instagram.com/sparkles_lights1" target="_blank" rel="noreferrer">📸 Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- location -->
+  <section id="location" class="reveal">
+    <h2 class="section-title">Our Location</h2>
+    <div class="map-wrap">
+      <!-- Use the provided place; this URL is a standard maps embed with query -->
+      <iframe
+        src="https://www.google.com/maps?q=17%20G.I.D.C.%20B%2Fh%20Dharti%20Parlour%20Palanpur%20385001&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-label="Map">
+      </iframe>
+    </div>
+    <p style="text-align:center;color:var(--muted);margin-top:10px">Visit us: 17, G.I.D.C., B/h. Dharti Parlour, Palanpur-385001 (B.K.), Gujarat</p>
+  </section>
+
+  <!-- contact quick CTA at bottom -->
+  <section id="contact" class="reveal">
+    <h2 class="section-title">Contact & Order</h2>
+    <div style="max-width:720px;margin:0 auto;text-align:center;color:var(--muted)">
+      <p>Quick action buttons — one tap to message or email us.</p>
+
+      <div class="contact-buttons" style="margin-top:14px">
+        <a class="btn btn-primary" href="mailto:sparkleslights12@gmail.com">📧 Email</a>
+        <a class="btn btn-primary" href="#" id="whatsappOrder">💬 Order on WhatsApp</a>
+        <a class="btn btn-primary" href="https://www.instagram.com/sparkles_lights1" target="_blank">📸 Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    © 2025 Sparkles Lights — 17, G.I.D.C., Palanpur • sparkleslights12@gmail.com
+  </footer>
+
+<!-- SCRIPTS: product data, WA auto message, reveal anim -->
 <script>
-  // --- CONFIG: update WhatsApp number here (use without + sign for wa.me)
-  const WA_NUMBER = "919601860305"; // +91 96018 60305
-  // Product list (update filenames to match images you upload)
+  // --- CONFIG ---
+  const WA_NUMBER = "919601860305"; // no plus sign
+  const EMAIL = "sparkleslights12@gmail.com";
+
+  // Product list - change filenames if you uploaded different names
   const PRODUCTS = [
-    {id:1, name:"120W Flood Light", price:"₹1,799", img:"images/product1.jpg"},
-    {id:2, name:"200W Flood Light", price:"₹2,999", img:"images/product2.jpg"},
-    {id:3, name:"240W Lens Flood Light", price:"₹3,499", img:"images/product3.jpg"},
-    {id:4, name:"150W Slim Flood Light", price:"₹2,199", img:"images/product4.jpg"},
-    {id:5, name:"500W High Power Flood", price:"₹7,999", img:"images/product5.jpg"},
-    {id:6, name:"50W Compact Flood", price:"₹999", img:"images/product6.jpg"}
+    { id:1, name:"120W Flood Light", price:"₹1,799", img:"images/product1.jpg" },
+    { id:2, name:"150W Slim Flood", price:"₹2,199", img:"images/product2.jpg" },
+    { id:3, name:"200W Flood Light (2-in-1)", price:"₹2,999", img:"images/product3.jpg" },
+    { id:4, name:"240W Lens Flood Light", price:"₹3,499", img:"images/product4.jpg" },
+    { id:5, name:"500W High Power Flood", price:"₹7,999", img:"images/product5.jpg" },
+    { id:6, name:"50W Compact Flood", price:"₹999", img:"images/product6.jpg" }
   ];
 
-  // build product grid
+  // Render product cards
   const grid = document.getElementById('productGrid');
   PRODUCTS.forEach(p=>{
-    const div = document.createElement('div');
-    div.className = 'card';
-    div.innerHTML = `
-      <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x400?text=Product'">
+    const el = document.createElement('div');
+    el.className = 'card reveal';
+    el.innerHTML = `
+      <img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/800x600?text=Product'">
       <h3>${p.name}</h3>
       <p>${p.price} — 2 year warranty</p>
-      <div class="actions">
-        <a class="wh" href="#" data-name="${encodeURIComponent(p.name)}" data-price="${encodeURIComponent(p.price)}" title="Order on WhatsApp">Order on WhatsApp</a>
+      <div class="row">
+        <a class="btn btn-primary" href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hello Sparkles Lights! I am interested in this product: '+p.name+' - Price: '+p.price+'. Please share details & delivery options.')}" target="_blank">💬 Order on WhatsApp</a>
         <div class="price">${p.price}</div>
       </div>
     `;
-    grid.appendChild(div);
+    grid.appendChild(el);
   });
 
-  // WhatsApp button click handler (delegation)
-  document.addEventListener('click', function(e){
-    const a = e.target.closest('.wh');
-    if(!a) return;
-    e.preventDefault();
-    const pname = decodeURIComponent(a.getAttribute('data-name')||'Product');
-    const pprice = decodeURIComponent(a.getAttribute('data-price')||'');
-    // message template (customize if needed)
-    const text = `Hello Sparkles Lights 👋%0AI'm%20interested%20in%20this%20product%20from%20your%20website:%0A*Product:*%20${pname}%0A*Price:*%20${pprice}%0A*Please%20share%20price%20and%20delivery%20details.*`;
-    const url = `https://wa.me/${WA_NUMBER}?text=${text}`;
-    window.open(url,'_blank');
-  });
-
-  // small reveal animation: fade cards in on scroll
-  const cards = document.querySelectorAll('.card');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(ent=>{
-      if(ent.isIntersecting){ ent.target.style.opacity=1; ent.target.style.transform='translateY(0)'; ent.target.style.transition='opacity .7s ease, transform .7s ease'; io.unobserve(ent.target); }
+  // Scroll reveal: show elements when in view
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting) entry.target.classList.add('show');
     });
-  }, {threshold:0.15});
-  cards.forEach(c=>{
-    c.style.opacity=0; c.style.transform='translateY(20px)'; io.observe(c);
+  }, {threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // Quick whatsappOrder button opens catalog chat (generic)
+  document.getElementById('whatsappOrder').addEventListener('click', function(e){
+    e.preventDefault();
+    const message = encodeURIComponent("Hello Sparkles Lights! I want to order. Please share price & delivery options.");
+    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
   });
 
-  // small logo glow pulse
-  const logo = document.getElementById('logoImg');
-  if(logo){
-    logo.style.filter='drop-shadow(0 12px 30px rgba(255,200,40,0.18))';
-  }
+  // Set email text if needed
+  document.getElementById('emailText').textContent = EMAIL;
 </script>
+
 </body>
 </html>
